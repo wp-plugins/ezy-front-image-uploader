@@ -1,0 +1,193 @@
+/**
+ * Plugin Name: Ezy FrontEnd Image Uploader
+ * Plugin URI: http://www.wordpress.org/Ezy-FrontEnd-Image-Uploader
+ * Description: Wordpress Easy Frontend Image uploader to any post,page
+ * Version: 1.0.0
+ * Author: Neil Gurung
+ * Author URI: http://www.neil.com.np/
+ */
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  font-family: 'Open sans', 'sans serif';
+  font-size: 14px;
+  color: #444;
+  margin: 1em;
+  height: 100%;
+}
+.container {
+  margin-left: 100px;
+}
+.image-uploader {
+  position: relative;
+  margin:10px;
+  padding:10px;
+}
+.image-uploader:not(.filled) {
+  opacity: 0.7;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1) inset;
+}
+.image-uploader:not(.filled):hover {
+  opacity: 1;
+}
+.image-uploader:not(.filled):hover .image {
+  border: 3px dashed #bbb!important;
+}
+.image-uploader.filled {
+  cursor: move;
+}
+.image-uploader .image {
+  overflow: hidden;
+  border: 1px solid #aaa;
+}
+.image-uploader .image {
+  width: 150px;
+  height: 150px;
+}
+.image-uploader.filled label {
+  display: none;
+}
+.image-uploader label {
+  display: block;
+  color: #888;
+  font-size: 1.9em;
+  margin: 1em;
+  position: absolute;
+  top: 0;
+  left: 74px;
+  padding: 10px;
+  
+}
+.image-uploader img {
+  border: none;
+}
+.image-uploader .ezy-image-name {
+  display: none;
+  
+}
+
+.image-uploader .zoom {
+  position: absolute;
+  top: 0;
+  left: -35px;
+}
+.image-uploader .zoom .plus {
+  background: url(http://s.cdpn.io/24822/zoom-in.png) center no-repeat;
+}
+.image-uploader .zoom .minus {
+  background: url(http://s.cdpn.io/24822/zoom-out.png) center no-repeat;
+}
+.image-uploader .zoom .close {
+  background: url(http://s.cdpn.io/24822/close-widget.png) center no-repeat;
+}
+.image-uploader .zoom .plus,
+.image-uploader .zoom .minus,
+.image-uploader .zoom .close {
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 2px;
+  font-size: 20px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+.image-uploader .zoom .plus:hover,
+.image-uploader .zoom .minus:hover,
+.image-uploader .zoom .close:hover {
+  opacity: 1;
+}
+.droppable .image {
+  border: 2px dashed #ccc!important;
+}
+
+#dvPreview{
+  margin-top:10px;
+  padding:10px;
+}
+
+
+
+#dvPreview{
+  float:left;
+}
+
+#dvPreview div.image {
+    max-width: 570px;
+    height: auto;
+    padding: 3px;
+    border: 1px solid; 
+    border-color: #DDD #CCC #CCC #DDD; 
+    position: relative; 
+    left: -4px; 
+    -moz-box-shadow: 3px 3px 9px #CCC;
+    -webkit-box-shadow: 3px 3px 9px #CCC;
+    box-shadow: 3px 3px 9px #CCC;
+
+} 
+
+/*span.cover{
+  display:none;
+}
+
+.boxcaption {
+  /* color: #fff; */
+  /* float: left; */
+  /* position: absolute; */
+ /* background: rgb(51,152,182);
+  background: rgba(51,152,182,.9);
+  height: 100px;
+  width: 274px;
+  padding-top: 12px;
+  padding-left: 18px;
+}*/
+
+li.image{
+
+	background-image: none;
+	background-repeat: repeat;
+	background-attachment: scroll;
+	background-position: 0 0;
+	width: 292px;
+	height: 197px;
+	float: left;
+	border: solid 6px #e2d9c0;
+	overflow: hidden;
+	margin-right: 10px;
+	margin-bottom: 24px;
+	margin-left: 10px;
+	padding: 3px;
+	border: 1px solid; 
+	border-color: #DDD #CCC #CCC #DDD; 
+	position:relative; 
+	left: -4px; 
+	-moz-box-shadow: 3px 3px 9px #CCC;
+	-webkit-box-shadow: 3px 3px 9px #CCC;
+	box-shadow: 3px 3px 9px #CCC;
+}
+
+span .ezy-title {
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  color: tan;
+}
+
+form #ezy-wrapper{
+	padding:10px;
+	margin-bottom: 10px;
+
+}
+
+div.ezy-upload{
+	margin-top;10px;
+}
+
+
+
+
+

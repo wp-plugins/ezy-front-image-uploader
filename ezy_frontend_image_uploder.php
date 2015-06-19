@@ -9,21 +9,21 @@
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) {
- 	die('Cannot Accessed  directly this file');
-}
+	if ( ! defined( 'ABSPATH' ) ) {
+		die('Cannot Accessed  directly this file');
+	}
 
-// Plugin dir path
-!defined('PLUGIN_DIR_PATH') ? define('PLUGIN_DIR_PATH', plugin_dir_path(__FILE__) ) : null;
-// Directory separator
-!defined('DS') ? define('DS', DIRECTORY_SEPARATOR) : NULL;
-// Template path
-!defined('EZY_TEMLATE_DIR_PATH') ? define('EZY_TEMLATE_DIR_PATH', PLUGIN_DIR_PATH .'templates' . DS ) : null;
+	// Plugin dir path
+	!defined('PLUGIN_DIR_PATH') ? define('PLUGIN_DIR_PATH', plugin_dir_path(__FILE__) ) : null;
+	// Directory separator
+	!defined('DS') ? define('DS', DIRECTORY_SEPARATOR) : NULL;
+	// Template path
+	!defined('EZY_TEMLATE_DIR_PATH') ? define('EZY_TEMLATE_DIR_PATH', PLUGIN_DIR_PATH .'templates' . DS ) : null;
 
 
 /**
+ * 
  * Handles the file handling for image uploader
- *
  * @package     ezy front image uploader
  * @subpackage  lib
  * @copyright   Copyright (c) 2015, Neil
@@ -43,7 +43,7 @@ class EzyFrontendImageUploader {
 	{
 		// include all necessary library classes
 		$this->ezyInclude();	
-				
+
 		add_action( 'wp_enqueue_scripts', array( &$this , 'loadScripts' ) );
 		add_action('wp_enqueue_scripts', array(&$this,'ezyEnqueueStyles'));
 
@@ -60,6 +60,7 @@ class EzyFrontendImageUploader {
 
 
 	/**
+	 * 
 	 * 	This method is used to initialize values
 	 * 	for ezy-upload
 	 * 	@access public
@@ -76,6 +77,7 @@ class EzyFrontendImageUploader {
 
 
 	/**
+	 * 
 	 * 	This method is used to initialize values
 	 * 	for ezy-upload
 	 * 	@access public
@@ -90,12 +92,15 @@ class EzyFrontendImageUploader {
 	
 
 	/**
-	 * 	This method is used to attach ids to current post
-	 * 	for ezy-upload
-	 * 	@access public
-	 *  @since 1.0
-	 *  @return void
-	 */
+	* 
+	* This method is used to attach ids to current post
+	* for ezy-upload
+	* @access public
+	* @since 1.0
+	* @return void
+	* 
+	*/
+	
 
 	public function ezyInitAllAttachIds() {
 		global $wpdb;
@@ -109,12 +114,13 @@ class EzyFrontendImageUploader {
 
 
 	/**
-	 * 	This method is used to get Guid save in wp_posts 
-	 * 	table of attached images for ezy-upload
-	 * 	@access public
-	 *  @since 1.0
-	 *  @return String
-	 */
+	* 
+	* 	This method is used to get Guid save in wp_posts 
+	* 	table of attached images for ezy-upload
+	* 	@access public
+	*   @since 1.0
+	*   @return String
+	*/
 	
 	
 	public function getGuid($id) {
@@ -129,22 +135,23 @@ class EzyFrontendImageUploader {
 	
 
 	/**
-	 * 	This is static method used to load scripts required
-	 * 	for  ezy upload
-	 * 	@access public
-	 *  @since 1.0
-	 *  @return void
-	 */
+	* 
+	* This is static method used to load scripts required
+	* for  ezy upload
+	* @access public
+	* @since 1.0
+	* @return void
+	*/
 
 	public function loadScripts() {
 		
 		global $wp_scripts;
-		 
+
 	    // tell WordPress to load jQuery UI tabs
-	    wp_enqueue_script('jquery-ui-draggable');
-	 
+		wp_enqueue_script('jquery-ui-draggable');
+
 	    // get registered script object for jquery-ui
-	    $ui = $wp_scripts->query('jquery-ui-core');
+		$ui = $wp_scripts->query('jquery-ui-core');
 		wp_enqueue_media();
 		wp_enqueue_script('media-upload');
 		//wp_enqueue_script('jquery-ui-core');
@@ -167,7 +174,7 @@ class EzyFrontendImageUploader {
 
 	public function ezyEnqueueStyles() {
 		// tell WordPress to load the Smoothness theme from Google CDN
-	    wp_enqueue_style('bootstrap-min-css',  plugins_url('assets/css/bootstrap/bootstrap-min.css',__FILE__) , array(), '1.0.0', false);
+		wp_enqueue_style('bootstrap-min-css',  plugins_url('assets/css/bootstrap/bootstrap-min.css',__FILE__) , array(), '1.0.0', false);
 		//wp_enqueue_style('ezy-image-upload-css', plugins_url('assets/css/ezy_image_upload.css',__FILE__) , array(), '1.0.0', false);
 		wp_enqueue_style('bx-slider-css', plugins_url('assets/css/bx-slider/jquery.bxslider.css',__FILE__) , array(), '1.0.0', false);
 		wp_enqueue_style('ezy-upload-css', plugins_url('assets/css/ezy-upload.css',__FILE__) , array(), '1.0.0', false);
@@ -176,6 +183,7 @@ class EzyFrontendImageUploader {
 
 
 	/**
+	* 
 	*	This method is used to display all the attached images 
 	*  @access public
 	*  @since 1.0
@@ -184,41 +192,31 @@ class EzyFrontendImageUploader {
 	
 
 	function the_content( $content ) { 
-	    $this->postId = get_the_ID();
-    	$this->ezyInitAllAttachIds();
-    	// This is for nivo slider attachments
-    	/*$content .= '<div class="slider-wrapper theme-default">
-							<div id="slider" class="nivoSlider">';
-	    foreach ($this->attachIds as $id) {
-	    	$src = wp_get_attachment_image_src( $id);
-	    	$src = $src[0];
-	    	$content .= '<img src="' .$src . '" data-thumb="' .$src . '"/>
-							';//sprintf("<img src='%s' />",$src,$content);
-	    }
-	    $content .= '</div>
-					</div>';*/
-	    //var_dump($content);
+		$this->postId = get_the_ID();
+		$this->ezyInitAllAttachIds();
+
 		// This is for bx slider attachments
 		$class = count($this->attachIds) > 0 ? 'bxslider' : '';
 		$content .= '<ul class="'. $class.'" style="list-style:none;">';
-					if(!empty($this->attachIds)){
-					    foreach ($this->attachIds as $id) {
-					    	$src = $this->getGuid( $id);
+		if(!empty($this->attachIds)){
+			foreach ($this->attachIds as $id) {
+				$src = $this->getGuid( $id);
 					    	//var_dump($id);die;
 					    	//$src = $src[0];
-					    	$content .= '<li><img src="' .$src . '" /></li>';
+				$content .= '<li><img src="' .$src . '" /></li>';
 					    	//sprintf("<img src='%s' />",$src,$content);
-					    }
-					}else{
-						$content .= '<li>'.__('No images attached to this post').'</li>';
-					}
-	    $content .= '</ul>';
+			}
+		}else{
+			$content .= '<li>'.__('No images attached to this post').'</li>';
+		}
+		$content .= '</ul>';
 
-	    return $content;
+		return $content;
 	}
 
 
 	/**
+	* 
 	*	This method is used to create shortcode for include slider 
 	*	at frontend. It can be used by :
 	* 	[ezy_slider]
@@ -233,22 +231,23 @@ class EzyFrontendImageUploader {
 		$class = count($this->attachIds) > 0 ? 'bxslider' : '';	
 		$content = '';
 		$content .= '<ul class="'. $class.'" style="list-style:none;">';
-			if(count($this->attachIds) > 0){
-			    foreach ($this->attachIds as $id) {
-			    	$src = $this->getGuid($id);
-			    	$content .= '<li><img src="' .$src . '" /></li>';
-			    }
-			}else{
-				$content .= '<li>'.__('No images attached to this post').'</li>';
+		if(count($this->attachIds) > 0){
+			foreach ($this->attachIds as $id) {
+				$src = $this->getGuid($id);
+				$content .= '<li><img src="' .$src . '" /></li>';
 			}
-	    $content .= '</ul>';
+		}else{
+			$content .= '<li>'.__('No images attached to this post').'</li>';
+		}
+		$content .= '</ul>';
 
-	    echo $content;
+		echo $content;
 
 	}
 
 
 	/**
+	* 
 	*	This method is used to create shortcode for include form 
 	*	for frontend Image uploader. It can be used by :
 	*	[ezy_upload]
@@ -259,9 +258,9 @@ class EzyFrontendImageUploader {
 
 	public function ezyFrontEndImageUploaderShortcodes($atts)	{
 		$a = shortcode_atts( array(
-		        'uploadtype' => 'a',
-		        'multiple_image_upload' => 1,
-		    ), $atts );
+			'uploadtype' => 'a',
+			'multiple_image_upload' => 1,
+			), $atts );
 		
 		extract($a);
 		$uploadType = $uploadtype;
@@ -275,6 +274,7 @@ class EzyFrontendImageUploader {
 	}
 
 	/**
+	* 
 	*	This method is used to save image to
 	*	wp_posts table according to current 
 	*	post_id
@@ -284,7 +284,7 @@ class EzyFrontendImageUploader {
 	*/
 
 	private function _saveToPost($fileName = ''){
-				
+
 		$filetype = wp_check_filetype( basename( $fileName ), null );
 
 		// Get the path to the upload directory.
@@ -297,7 +297,7 @@ class EzyFrontendImageUploader {
 			'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $fileName ) ),
 			'post_content'   => '',
 			'post_status'    => 'inherit'
-		);
+			);
 
 		// Insert the attachment.
 		$attachId = wp_insert_attachment( $attachment, $fileName, $this->postId );
@@ -327,7 +327,7 @@ class EzyFrontendImageUploader {
 	public function AttachImages() {
 		ob_clean();
 		if ( ! function_exists( 'wp_handle_upload' ) ) {
-		   require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		}
 		
 		// The ID of the post this attachment is for.
@@ -338,50 +338,51 @@ class EzyFrontendImageUploader {
 		/*var_dump($files);die;*/
 		$upload_overrides = array( 'test_form' => false );
 		if(count($files['name']) == 1){
-				$key = 0;
-			  	$file = array(
-				      'name'     => $files['name'][$key],
-				      'type'     => $files['type'][$key],
-				      'tmp_name' => $files['tmp_name'][$key],
-				      'error'    => $files['error'][$key],
-				      'size'     => $files['size'][$key]
-				    );
-			  	
-				$moveFile = wp_handle_upload($file,$upload_overrides);
+			$key = 0;
+			$file = array(
+				'name'     => $files['name'][$key],
+				'type'     => $files['type'][$key],
+				'tmp_name' => $files['tmp_name'][$key],
+				'error'    => $files['error'][$key],
+				'size'     => $files['size'][$key]
+				);
+
+			$moveFile = wp_handle_upload($file,$upload_overrides);
 
 				if($moveFile){ //file is uploaded successfully.
-			    	$this->_saveToPost($file['name']);
-			    	return true;
-			    }else{
+					$this->_saveToPost($file['name']);
+					return true;
+				}else{
 					$_SESSION['msg'] = __($moveFile['error']);
 					return false;
 				}
-						
-		}
-		foreach ($files['name'] as $key => $value) {
-		  	if ($files['name'][$key]) {
-			    $file = array(
-			      'name'     => $files['name'][$key],
-			      'type'     => $files['type'][$key],
-			      'tmp_name' => $files['tmp_name'][$key],
-			      'error'    => $files['error'][$key],
-			      'size'     => $files['size'][$key]
-			    );
-				
-			    $moveFile = wp_handle_upload($file,$upload_overrides);
-			    
+
+			}
+			foreach ($files['name'] as $key => $value) {
+				if ($files['name'][$key]) {
+					$file = array(
+						'name'     => $files['name'][$key],
+						'type'     => $files['type'][$key],
+						'tmp_name' => $files['tmp_name'][$key],
+						'error'    => $files['error'][$key],
+						'size'     => $files['size'][$key]
+						);
+
+					$moveFile = wp_handle_upload($file,$upload_overrides);
+
 			    if($moveFile){ //file is uploaded successfully.
 			    	$this->_saveToPost($file['name']);
 			    }else{
-					$_SESSION['msg'] = __($moveFile['error']);
-					return false;
-				}
+			    	$_SESSION['msg'] = __($moveFile['error']);
+			    	return false;
+			    }
 			}
 		}
 	}
 
 	
 	/**
+	* 
 	*	This method is used for ajax Attach images
 	*   @access public
 	*   @since 1.0
@@ -395,8 +396,6 @@ class EzyFrontendImageUploader {
 		// The ID of the post this attachment is for.
 		$parent_post_id = $_POST['postid'];
 		
-		// $filename should be the path to a file in the upload directory.
-		//$filename = UPLOAD_IMG_DIR_PATH . $filename;
 		
 		// Check the type of file. We'll use this as the 'post_mime_type'.
 		$filetype = wp_check_filetype( basename( $filename ), null );
@@ -411,7 +410,7 @@ class EzyFrontendImageUploader {
 			'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
 			'post_content'   => '',
 			'post_status'    => 'inherit'
-		);
+			);
 
 		// Insert the attachment.
 		$attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );

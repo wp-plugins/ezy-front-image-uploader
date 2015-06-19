@@ -10,7 +10,7 @@
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
- 	die('Cannot Accessed  directly this file');
+	die('Cannot Accessed  directly this file');
 }
 
 class EzyFileHandler {
@@ -28,7 +28,7 @@ class EzyFileHandler {
 	public $everyFileUploaded = array();
 
 
-	  	
+	
 	function __construct() {
 		
 		EzyFileHandler::$uploadDir = wp_upload_dir();;
@@ -74,13 +74,13 @@ class EzyFileHandler {
 
 
 	private function getExtension($str) {
-        $i = strrpos($str, ".");
-        if (!$i) {
-            return "";
-        }
-        $l = strlen($str) - $i;
-        $ext = substr($str, $i + 1, $l);
-        return $ext;
+		$i = strrpos($str, ".");
+		if (!$i) {
+			return "";
+		}
+		$l = strlen($str) - $i;
+		$ext = substr($str, $i + 1, $l);
+		return $ext;
 	}
 
 	/**
@@ -93,9 +93,9 @@ class EzyFileHandler {
 
 	public function checkEachImageExtension() {
 		foreach ($this->ezyImageNames as $name) {
-	  		$extension = strtolower($this->getExtension($name));
-            $this->correctExtn[] = in_array($extension,$this->validExtn) ? true : false;
-        }
+			$extension = strtolower($this->getExtension($name));
+			$this->correctExtn[] = in_array($extension,$this->validExtn) ? true : false;
+		}
 	}
 
 
@@ -111,18 +111,18 @@ class EzyFileHandler {
 		if(in_array(false,$this->correctExtn)){
 			return array(false);
 		}
-  		$tmpNames = $this->files['ezy-upload']['tmp_name'];
-  		foreach ($tmpNames as $key=>$tmp) {
-  			$filename = basename($this->ezyImageNames[$key]);
-  			$this->everyFileUploaded[] = move_uploaded_file($tmp, EzyFileHandler::$uploadDir['path'].'/'.$filename) ?
-  									true : false; 
-  			if(file_exists(EzyFileHandler::$uploadDir['path'].'/'.$filename)){
-  				chmod(EzyFileHandler::$uploadDir['path'].'/'.$filename,0777);
-  			}
-  		}
+		$tmpNames = $this->files['ezy-upload']['tmp_name'];
+		foreach ($tmpNames as $key=>$tmp) {
+			$filename = basename($this->ezyImageNames[$key]);
+			$this->everyFileUploaded[] = move_uploaded_file($tmp, EzyFileHandler::$uploadDir['path'].'/'.$filename) ?
+			true : false; 
+			if(file_exists(EzyFileHandler::$uploadDir['path'].'/'.$filename)){
+				chmod(EzyFileHandler::$uploadDir['path'].'/'.$filename,0777);
+			}
+		}
 
-  		return $this->everyFileUploaded;
-	  	
+		return $this->everyFileUploaded;
+		
 	}
 
 }

@@ -52,7 +52,9 @@ Still working on it..
 == Screenshots ==
 
 1.Default media upload form
+
 2.Dynamic media upload form
+
 3.ezy slider
 
 == Changelog ==

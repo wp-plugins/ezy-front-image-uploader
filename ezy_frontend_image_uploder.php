@@ -3,7 +3,7 @@
 	Plugin Name: Ezy Front Image Uploader
 	Plugin URI:  http://www.wordpress.org/ezy-front-image-uploader
 	Description: An easy front image uploader toolkit that helps you upload & attach images to post pages. Beautifully.
-	Version: 1.0.0
+	Version: 1.0.0.1
 	Author: Neil Gurung
 	Author URI: http://www.neil.com.np/
  */
